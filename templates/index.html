@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image reverse search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet"/>
+</head>
+<body >
+    <div style="border: 2px solid #100f0f;">
+        <h1 style="text-align:center;">Image reverse search</h1>
+        <div class="input-group" style="display: inline">
+                <form method="POST" action="/crawl" enctype="multipart/form-data">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"  name="q"/>
+                    <input type="submit" class="btn btn-outline-primary">
+                </form>
+            </div>
+        <div class="continer" style="text-align:center;">
+            <div>
+                <form method="POST" action="/upload" enctype="multipart/form-data" class="dropzone">
+                    <div style="display: inline">
+                        <input type="file" class="form-control" name ="file">
+                        <input type="submit" class="form-control" value=Upload>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="display:inline-block;">
+        {% if query_path %}
+            <h2>Query:</h2>
+            <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">
+                <img src="{{ query_path }}" height="50px" >
+            </figure>
+        {% endif %}
+    </div>
+    <div style="display:block;">
+        {% for score in scores %}
+        <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">
+            <img src="{{ score[0] }}" height="200px">
+            <figcaption>{{ score[1] }}</figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+</body>
+</html>
